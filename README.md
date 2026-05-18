@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MundoEquil — Panel Ambiental en Tiempo Real
 
-## Getting Started
+Plataforma web gratuita y open-source que centraliza información ambiental en tiempo real: clima, calidad del aire, astronomía, sismos, energía renovable y más.
 
-First, run the development server:
+**[mundoequil.vercel.app](https://mundoequil.vercel.app)** · Gratis · Sin registro · Open source
+
+---
+
+## Características
+
+- **110+ tarjetas** de información ambiental organizadas en 5 elementos (Aire, Agua, Tierra, Sol y Cielo, General)
+- **Tiempo real** — clima cada 60 s, AQI cada 5 min, sismos cada 2 min
+- **100% APIs gratuitas** — sin coste, sin límites prácticos para uso personal
+- **PWA instalable** — funciona como app nativa en móvil y escritorio
+- **Dark mode** exclusivo, diseño glassmorphism
+- **Mapa interactivo** con radar, satélite infrarrojo, viento y nubes
+- Búsqueda por ciudad, geolocalización, favoritos y compartir por URL
+
+## Stack
+
+| Capa | Tecnología |
+|------|-----------|
+| Frontend | Next.js 14 (App Router) + TypeScript strict |
+| Estilos | Tailwind CSS + shadcn/ui |
+| Animaciones | Framer Motion |
+| Mapas | Leaflet.js + CARTO dark tiles |
+| Estado | Zustand (persistido en localStorage) |
+| Fetching | TanStack Query |
+| Deploy | Vercel (free tier) |
+
+## APIs utilizadas
+
+| API | Datos | Key |
+|-----|-------|-----|
+| [Open-Meteo](https://open-meteo.com) | Clima, AQI, marino, agro | No requerida |
+| [USGS](https://earthquake.usgs.gov) | Sismos | No requerida |
+| [Nominatim](https://nominatim.org) | Geocodificación | No requerida |
+| [RainViewer](https://www.rainviewer.com) | Radar e infrarrojo | No requerida |
+| [NASA APOD](https://apod.nasa.gov) | Foto astronómica del día | Opcional (usa DEMO_KEY) |
+| [OpenWeatherMap](https://openweathermap.org) | Tiles de mapa | Requerida (free tier) |
+
+## Desarrollo local
 
 ```bash
+# 1. Clonar
+git clone https://github.com/thestrokes1/MundoEquil.git
+cd MundoEquil
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Configurar variables de entorno
+cp .env.example .env.local
+# Editar .env.local con tus keys
+
+# 4. Arrancar
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# → http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variables de entorno
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+OWM_API_KEY=        # OpenWeatherMap — tiles del mapa (gratuito)
+NASA_API_KEY=       # NASA APOD — opcional, usa DEMO_KEY si se omite
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Estructura del proyecto
 
-## Learn More
+```
+src/
+├── app/
+│   ├── api/          # 88 rutas BFF (ocultan API keys, transforman datos)
+│   ├── dashboard.tsx # Renderiza las 110 tarjetas
+│   └── layout.tsx
+├── components/
+│   ├── air/          # Tarjetas de calidad del aire
+│   ├── astronomy/    # Tarjetas astronómicas
+│   ├── map/          # Mapa interactivo
+│   ├── shared/       # Header, nav, preferencias
+│   └── weather/      # Tarjetas de clima (mayoría)
+├── lib/
+│   └── card-categories.ts  # Fuente de verdad: jerarquía de navegación
+└── stores/           # Zustand: ubicación, preferencias, nav
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Contribuir
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Pull requests bienvenidos. Para cambios grandes, abre un issue primero.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Patrón estándar para nuevas tarjetas:
+1. Ruta API en `src/app/api/<name>/route.ts`
+2. Componente en `src/components/<cat>/<name>-card.tsx`
+3. Toggle en `src/stores/preferences-store.ts`
+4. Entrada en `src/lib/card-categories.ts`
+5. Render en `src/app/dashboard.tsx`
 
-## Deploy on Vercel
+## Licencia
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
