@@ -2,6 +2,7 @@ const CACHE = 'mundoequil-v1'
 
 const STATIC = [
   '/',
+  '/offline',
   '/manifest.json',
 ]
 
@@ -23,12 +24,12 @@ self.addEventListener('fetch', (e) => {
   const { request } = e
   const url = new URL(request.url)
 
-  // API routes y recursos externos → network-first, sin caché
+  // API routes y recursos externos → network-only, sin caché
   if (url.pathname.startsWith('/api/') || url.origin !== self.location.origin) {
     return
   }
 
-  // App shell → cache-first
+  // App shell → cache-first, fallback a /offline si no hay red
   e.respondWith(
     caches.match(request).then(cached => {
       if (cached) return cached
@@ -38,7 +39,7 @@ self.addEventListener('fetch', (e) => {
           caches.open(CACHE).then(c => c.put(request, clone))
         }
         return res
-      }).catch(() => caches.match('/'))
+      }).catch(() => caches.match('/offline'))
     })
   )
 })
