@@ -10,7 +10,10 @@ export const metadata: Metadata = {
   title: 'MundoEquil — Panel Ambiental en Tiempo Real',
   description: 'Clima, calidad del aire, astronomía, sismos y más — en tiempo real. Gratis y sin registro.',
   manifest: '/manifest.json',
-  icons: { icon: '/favicon.ico' },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/icon-192.png',
+  },
   openGraph: {
     title: 'MundoEquil — Panel Ambiental en Tiempo Real',
     description: 'Clima, calidad del aire, astronomía, sismos y más — en tiempo real. Gratis y sin registro.',
@@ -20,7 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'MundoEquil — Panel Ambiental en Tiempo Real',
     description: 'Clima, calidad del aire, astronomía, sismos y más — en tiempo real. Gratis y sin registro.',
   },
