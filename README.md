@@ -61,8 +61,8 @@ npm run dev
 ## Variables de entorno
 
 ```env
-OWM_API_KEY=        # OpenWeatherMap — tiles del mapa (gratuito)
-NASA_API_KEY=       # NASA APOD — opcional, usa DEMO_KEY si se omite
+OPENWEATHERMAP_API_KEY=   # OpenWeatherMap — tiles del mapa (gratuito)
+NASA_API_KEY=             # NASA APOD — opcional, usa DEMO_KEY si se omite
 ```
 
 ## Estructura del proyecto

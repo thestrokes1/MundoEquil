@@ -8,9 +8,22 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 
 export const metadata: Metadata = {
   title: 'MundoEquil — Panel Ambiental en Tiempo Real',
-  description: 'Clima, calidad del aire, astronomía, sismos y más — en tiempo real.',
+  description: 'Clima, calidad del aire, astronomía, sismos y más — en tiempo real. Gratis y sin registro.',
   manifest: '/manifest.json',
   icons: { icon: '/favicon.ico' },
+  openGraph: {
+    title: 'MundoEquil — Panel Ambiental en Tiempo Real',
+    description: 'Clima, calidad del aire, astronomía, sismos y más — en tiempo real. Gratis y sin registro.',
+    url: 'https://mundoequil.vercel.app',
+    siteName: 'MundoEquil',
+    locale: 'es_ES',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'MundoEquil — Panel Ambiental en Tiempo Real',
+    description: 'Clima, calidad del aire, astronomía, sismos y más — en tiempo real. Gratis y sin registro.',
+  },
 }
 
 export const viewport: Viewport = {

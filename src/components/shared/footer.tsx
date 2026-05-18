@@ -1,10 +1,12 @@
 export function Footer() {
   const sources = [
-    'Open-Meteo (clima, AQI, marino, inundaciones, agro)',
+    'Open-Meteo (clima, AQI, marino, agro)',
     'USGS (sismos)',
     'NASA APOD',
     'NOAA SWPC (clima espacial)',
-    'OpenStreetMap / Nominatim (geocodificación)',
+    'OpenWeatherMap (tiles de mapa)',
+    'RainViewer (radar e infrarrojo)',
+    'Nominatim / OSM (geocodificación)',
     'CartoDB (mapa base)',
   ]
 
