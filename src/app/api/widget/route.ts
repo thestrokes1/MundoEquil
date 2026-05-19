@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
       const data = await res.json()
       const c = data.current
       temp = `${Math.round(c.temperature)}°C`
-      condition = c.conditionLabel ?? '—'
+      condition = c.description ?? '—'
       humidity = `${c.humidity}%`
       wind = `${Math.round(c.windSpeed)} km/h`
       icon = c.isDaytime ? '☀️' : '🌙'

@@ -1,4 +1,4 @@
-const CACHE = 'mundoequil-v1'
+const CACHE = 'mundoequil-20260518'
 
 const STATIC = [
   '/',
