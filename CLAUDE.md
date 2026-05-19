@@ -25,6 +25,8 @@ Plataforma web gratuita y open-source que centraliza información ambiental en t
 | Componentes tarjeta (`*-card.tsx`) | **113** |
 | Toggles de preferencias | **110** |
 | TypeScript errors | **0** |
+| URL producción | **https://mundoequil.vercel.app** |
+| Repo GitHub | **https://github.com/thestrokes1/MundoEquil** |
 
 ## Tiempo Real
 
@@ -39,10 +41,9 @@ Plataforma web gratuita y open-source que centraliza información ambiental en t
 ## APIs Gratuitas
 
 - **Open-Meteo** — clima + AQI (sin key, ilimitado) · forecast + archive + marine
-- **OpenWeatherMap** — 1,000 calls/día (también usado para tiles del mapa)
-- **WeatherAPI** — 1,000,000 calls/mes
+- **OpenWeatherMap** — tiles de mapa (OPENWEATHERMAP_API_KEY en Vercel)
 - **USGS** — sismos (sin key, ilimitado)
-- **NASA APOD** — foto astronómica (NASA_API_KEY en .env, usa DEMO_KEY si no)
+- **NASA APOD** — foto astronómica (NASA_API_KEY en Vercel, usa DEMO_KEY si no hay)
 - **Nominatim** — geocodificación inversa (sin key)
 - **RainViewer** — radar e infrarrojo satelital para el mapa (sin key, ilimitado)
 
@@ -160,3 +161,22 @@ Definida en `src/lib/card-categories.ts`. Cada tarjeta tiene `key`, `label`, `de
 Todas las tarjetas se controlan con booleanos en `src/stores/preferences-store.ts`.
 Panel UI: `src/components/shared/preferences-panel.tsx` — usa `CATEGORIES` derivado de `ELEMENTS`.
 Dashboard: `src/app/dashboard.tsx`.
+
+## Infraestructura completada (2026-05-18)
+
+- `src/app/error.tsx` — error boundary global
+- `src/app/not-found.tsx` — página 404
+- `src/app/loading.tsx` — skeleton global de carga
+- `src/app/offline/page.tsx` — página sin conexión
+- `src/app/opengraph-image.tsx` — OG image 1200×630 (edge, ImageResponse)
+- `src/app/sitemap.ts` — genera `/sitemap.xml` automáticamente
+- `public/sw.js` — service worker PWA (cache-first app shell, network-first API)
+- `public/robots.txt` — permite bots, apunta al sitemap
+- `next.config.ts` — security headers (X-Frame-Options, nosniff, Referrer-Policy, etc.)
+- `layout.tsx` — apple-touch-icon, twitter:card summary_large_image
+- `manifest.json` — iconos SVG con sizes "any"
+
+## Notas de mantenimiento
+
+- Al hacer deploy con cambios significativos: actualizar la fecha en `public/sw.js` (`mundoequil-YYYYMMDD`) para invalidar el cache de los usuarios
+- Las API keys están en Vercel (no en el repo): `OPENWEATHERMAP_API_KEY` y `NASA_API_KEY`
